@@ -35,12 +35,19 @@ public class Server {
         String input = new String(b).trim();
         System.out.println(input);
 
+        // testing
+        //test(input);
+
         BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
         PrintWriter writer = new PrintWriter(out, true);  // char output to the client
 
         // HTTP Response
         if(!input.isEmpty()){
-          writer.println(processRequest(input));
+
+
+         writer.println(processRequest(input));
+
+
         }else{
           writer.println("HTTP/1.1 200 OK");
           writer.println("Server: TEST");
@@ -61,10 +68,16 @@ public class Server {
   // Response is a raw http response string
   public static String processRequest(String requestString){
     ParsedRequest request = CustomParser.parse(requestString);
-    BaseHandler handler = HandlerFactory.getHandler(request);
-    CustomHttpResponse response = handler.handleRequest(request);
-    response.headers.put("Content-type", "application/json");
-    return response.toString();
+//    BaseHandler handler = HandlerFactory.getHandler(request);
+//    CustomHttpResponse response = handler.handleRequest(request);
+//    response.headers.put("Content-type", "application/json");
+//    return response.toString();
+    return " ";
+  }
+
+
+  public static void test(String input){
+    System.out.println(input.charAt(38) == '\n');
   }
 
 }
