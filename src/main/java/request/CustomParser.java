@@ -14,6 +14,7 @@ public class CustomParser {
         String body = getBody(request);
         System.out.println("line 15: " + head);
         processHead(parsedRequest, head);
+        parsedRequest.setBody(body);
 
 
      // System.out.println(body);
@@ -23,7 +24,6 @@ public class CustomParser {
 
   private static void processHead(ParsedRequest parsedRequest, String head) {
       int start = 0;
-      String params = "";
       System.out.println("line 27: length of head: " + head.length());
       for (int i = 0; i < head.length(); i++) {
           // find the method in the head string
@@ -92,12 +92,11 @@ public class CustomParser {
   private static String getBody(String request){
       int start = 0;
       for (int i = 0 ; i < request.length(); i++){
-          if (request.charAt(i) == '{'){
-              start = i;
+          if (request.charAt(i) == '\n' && request.charAt(i+1) == '\n'){
+              start = i + 2;
+              return request.substring(start, request.length());
           }
-          else if (request.charAt(i) == '}'){
-              return request.substring(start+1, i).trim();
-          }
+
       }
       return "";
   }
