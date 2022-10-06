@@ -92,7 +92,7 @@ public class CustomParser {
   private static String getBody(String request){
       int start = 0;
       for (int i = 0 ; i < request.length(); i++){
-          if (request.charAt(i) == '\n' && request.charAt(i+1) == '\n'){
+          if (request.charAt(i) == '\n' && i+1 < request.length() && request.charAt(i+1) == '\n'){
               start = i + 2;
               return request.substring(start, request.length());
           }
