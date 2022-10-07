@@ -1,6 +1,9 @@
 package response;
 
+import handler.GsonTool;
+
 import java.util.Map;
+import java.util.SplittableRandom;
 
 public class CustomHttpResponse {
   public final Map<String,String> headers;
@@ -18,6 +21,20 @@ public class CustomHttpResponse {
 
   // TODO fill this out
   public String toString(){
-    return null;
+
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append(version + " " + status + "\n");
+    if (status.compareTo("404 Not Found") == 0){
+      return stringBuilder.toString();
+    }
+
+    for(Map.Entry<String, String> entry : headers.entrySet()){
+      stringBuilder.append(entry.getKey() + ": " + entry.getValue() + "\n");
+    }
+    stringBuilder.append("\n" + GsonTool.gson.toJson(body, RestApiAppResponse.class));
+
+    return stringBuilder.toString();
+
   }
 }

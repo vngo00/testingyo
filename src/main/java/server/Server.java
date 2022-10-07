@@ -68,16 +68,12 @@ public class Server {
   // Response is a raw http response string
   public static String processRequest(String requestString){
     ParsedRequest request = CustomParser.parse(requestString);
-//    BaseHandler handler = HandlerFactory.getHandler(request);
-//    CustomHttpResponse response = handler.handleRequest(request);
-//    response.headers.put("Content-type", "application/json");
-//    return response.toString();
-    return " ";
-  }
+    BaseHandler handler = HandlerFactory.getHandler(request);
+    CustomHttpResponse response = handler.handleRequest(request);
+    response.headers.put("Content-type", "application/json");
+    System.out.println("result of the response:" +response.toString());
+    return response.toString();
 
-
-  public static void test(String input){
-    System.out.println(input.charAt(38) == '\n');
   }
 
 }

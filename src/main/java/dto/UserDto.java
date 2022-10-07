@@ -2,6 +2,8 @@ package dto;
 
 public class UserDto extends BaseDto{
 
+
+
   private String userName;
 
   public UserDto() {

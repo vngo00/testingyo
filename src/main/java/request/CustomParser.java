@@ -6,15 +6,20 @@ public class CustomParser {
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages
   // TODO fill this out
   public static ParsedRequest parse(String request){
-        ParsedRequest parsedRequest = new ParsedRequest();
+
+      ParsedRequest parsedRequest = new ParsedRequest();
 
         // contains method, path, and params
-        String head = getHead(request);
+      String head = getHead(request);
         // contain body content
-        String body = getBody(request);
-        System.out.println("line 15: " + head);
-        processHead(parsedRequest, head);
-        parsedRequest.setBody(body);
+      //System.out.println("CustomParser line 14: \n\n " + request);
+
+
+      String body = getBody(request);
+       // System.out.println("line 15: " + head);
+     // System.out.println("CustomParser: line 14 : " + body);
+      processHead(parsedRequest, head);
+      parsedRequest.setBody(body);
 
 
      // System.out.println(body);
@@ -90,13 +95,14 @@ public class CustomParser {
   }
 
   private static String getBody(String request){
-      int start = 0;
-      for (int i = 0 ; i < request.length(); i++){
-          if (request.charAt(i) == '\n' && i+1 < request.length() && request.charAt(i+1) == '\n'){
-              start = i + 2;
-              return request.substring(start, request.length());
-          }
+      System.out.println("length of request: " + request.length());
+      System.out.println("here the body:\n\n");
 
+
+      for(int i =0; i < request.length(); i++){
+          if(request.charAt(i) == '{'){
+              return request.substring(i, request.length());
+          }
       }
       return "";
   }
