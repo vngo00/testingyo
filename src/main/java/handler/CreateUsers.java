@@ -12,11 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class CreateUsers implements BaseHandler{
-    public static void main(String[] args) {
-        String json = "{'userName' : 'vinh'}";
-        UserDto newUser = GsonTool.gson.fromJson(json,UserDto.class);
-        System.out.println(newUser != null);
-    }
 
     @Override
     public CustomHttpResponse handleRequest(ParsedRequest request) {

@@ -10,7 +10,7 @@ public class CustomParser {
       ParsedRequest parsedRequest = new ParsedRequest();
 
         // contains method, path, and params
-      String head = getHead(request);
+
         // contain body content
       //System.out.println("CustomParser line 14: \n\n " + request);
 
@@ -18,7 +18,7 @@ public class CustomParser {
       String body = getBody(request);
        // System.out.println("line 15: " + head);
      // System.out.println("CustomParser: line 14 : " + body);
-      processHead(parsedRequest, head);
+      processHead(parsedRequest, request);
       parsedRequest.setBody(body);
 
 
@@ -27,14 +27,14 @@ public class CustomParser {
   }
 
 
-  private static void processHead(ParsedRequest parsedRequest, String head) {
+  private static void processHead(ParsedRequest parsedRequest, String request) {
+      String head = getHead(request);
       int start = 0;
-      System.out.println("line 27: length of head: " + head.length());
+
       for (int i = 0; i < head.length(); i++) {
           // find the method in the head string
           if (head.charAt(i) == ' ') {
               parsedRequest.setMethod(head.substring(start, i));
-              System.out.println("line 32: method: " + head.substring(start, i));
               start = i + 1;
               break;
           }
@@ -44,10 +44,7 @@ public class CustomParser {
           if (head.charAt(i) == ' ' || head.charAt(i) == '?') {
               parsedRequest.setPath(head.substring(start, i));
 
-              System.out.println("line 42 path: " + head.substring(start, i));
-              System.out.println("line 43 index after path: " + start);
               start = i + 1;
-              System.out.println("line 44 new index for start: " + start);
               break;
           }
       }
@@ -56,7 +53,6 @@ public class CustomParser {
       for(int i = start; i < head.length(); i++){
 
           if (head.charAt(i) == ' '){
-              System.out.println(head.substring(start, i));
               handleParams(parsedRequest, head.substring(start, i+1));
               break;
           }
@@ -78,7 +74,6 @@ public class CustomParser {
                     value = params.substring(start, i);
                     start = i + 1;
                     parsedRequest.setQueryParam(key, value);
-                    System.out.println("key: " + key + " and value: " + value);
                 }
 
             }
@@ -101,6 +96,7 @@ public class CustomParser {
 
       for(int i =0; i < request.length(); i++){
           if(request.charAt(i) == '{'){
+              System.out.println("length of the body: " + (request.length() - i));
               return request.substring(i, request.length());
           }
       }

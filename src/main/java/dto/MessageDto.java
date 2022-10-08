@@ -41,4 +41,9 @@ public class MessageDto extends BaseDto{
   public void setMessage(String message) {
     this.message = message;
   }
+
+
+  public String toString(){
+    return "fromId : " + fromId + " toId: " + toId + " Message: " + message;
+  }
 }
