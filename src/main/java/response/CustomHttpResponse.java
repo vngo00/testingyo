@@ -32,7 +32,8 @@ public class CustomHttpResponse {
     for(Map.Entry<String, String> entry : headers.entrySet()){
       stringBuilder.append(entry.getKey() + ": " + entry.getValue() + "\n");
     }
-    stringBuilder.append("\n" + GsonTool.gson.toJson(body, RestApiAppResponse.class));
+//    stringBuilder.append("\n" + GsonTool.gson.toJson(body, RestApiAppResponse.class));
+    stringBuilder.append(GsonTool.gson.toJson(body, RestApiAppResponse.class));
 
     return stringBuilder.toString();
 
