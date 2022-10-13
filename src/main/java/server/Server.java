@@ -67,8 +67,8 @@ public class Server {
     ParsedRequest request = CustomParser.parse(requestString);
     BaseHandler handler = HandlerFactory.getHandler(request);
     CustomHttpResponse response = handler.handleRequest(request);
-    response.headers.put("Content-type", "application/json");
-    System.out.println("result of the response:" +response.toString());
+    //response.headers.put("Content-type", "application/json");
+    //System.out.println("result of the response:" +response.toString());
     return response.toString();
 
   }

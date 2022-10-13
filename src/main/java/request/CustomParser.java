@@ -95,9 +95,10 @@ public class CustomParser {
 
 
       for(int i =0; i < request.length(); i++){
-          if(request.charAt(i) == '{'){
+//          if(request.charAt(i) == '{'){
+          if(request.charAt(i) == '\n' && request.charAt(i-1) == '\n'){
               System.out.println("length of the body: " + (request.length() - i));
-              return request.substring(i, request.length());
+              return request.substring(i+1, request.length());
           }
       }
       return "";

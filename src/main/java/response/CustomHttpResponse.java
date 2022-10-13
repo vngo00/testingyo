@@ -29,9 +29,13 @@ public class CustomHttpResponse {
       return stringBuilder.toString();
     }
 
-    for(Map.Entry<String, String> entry : headers.entrySet()){
-      stringBuilder.append(entry.getKey() + ": " + entry.getValue() + "\n");
+    if(!headers.isEmpty()) {
+      for (Map.Entry<String, String> entry : headers.entrySet()) {
+        stringBuilder.append(entry.getKey() + ": " + entry.getValue() + "\n\n");
+      }
     }
+    else
+      stringBuilder.append('\n');
 //    stringBuilder.append("\n" + GsonTool.gson.toJson(body, RestApiAppResponse.class));
     stringBuilder.append(GsonTool.gson.toJson(body, RestApiAppResponse.class));
 
